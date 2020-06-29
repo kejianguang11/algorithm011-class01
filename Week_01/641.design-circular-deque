@@ -1,0 +1,211 @@
+/*
+ * @lc app=leetcode.cn id=641 lang=cpp
+ *
+ * [641] 设计循环双端队列
+ */
+
+// @lc code=start
+// with double stack
+// class MyCircularDeque {
+//     public:
+//         int capacity;
+//         int size;
+//         stack<int> stack_in;
+//         stack<int> stack_out;
+
+//     public:
+//         /** Initialize your data structure here. Set the size of the deque to be k. */
+//         MyCircularDeque(int k) {
+//             capacity = k;
+//             size = 0;
+//         }
+        
+//         /** Adds an item at the front of Deque. Return true if the operation is successful. */
+//         bool insertFront(int value) {
+//             if(isFull()) return false;
+//             stack_out.push(value);
+//             size ++;
+//             return true;
+//         }
+        
+//         /** Adds an item at the rear of Deque. Return true if the operation is successful. */
+//         bool insertLast(int value) {
+//             if(isFull()) return false;
+//             stack_in.push(value);
+//             size ++;
+//             return true;
+//         }
+        
+//         /** Deletes an item from the front of Deque. Return true if the operation is successful. */
+//         bool deleteFront() {
+//             if(isEmpty()) return false;
+//             if(stack_out.empty())
+//             {
+//                 source2Des(stack_in,stack_out);
+//             }
+//             stack_out.pop();
+//             size --;
+//             return true;
+//         }
+        
+//         /** Deletes an item from the rear of Deque. Return true if the operation is successful. */
+//         bool deleteLast() {
+//             if(isEmpty()) return false;
+//             if(stack_in.empty())
+//             {
+//                 source2Des(stack_out,stack_in);
+//             }
+//             stack_in.pop();
+//             size --;
+//             return true;
+//         }
+        
+//         /** Get the front item from the deque. */
+//         int getFront() {
+//             if(isEmpty()) return -1;
+//             if(stack_out.empty())
+//             {
+//                 source2Des(stack_in,stack_out);
+//             }
+//             return stack_out.top();
+//         }
+        
+//         /** Get the last item from the deque. */
+//         int getRear() {
+//             if(isEmpty()) return -1;
+//             if(stack_in.empty())
+//             {
+//                 source2Des(stack_out,stack_in);
+//             }
+//             return stack_in.top();
+//         }
+        
+//         /** Checks whether the circular deque is empty or not. */
+//         bool isEmpty() {
+//             return size ==0;
+//         }
+        
+//         /** Checks whether the circular deque is full or not. */
+//         bool isFull() {
+//             return size >= capacity;
+//         }
+
+//         void source2Des(stack<int> source,stack<int> des)
+//         {
+//             while(!source.empty())
+//             {
+//                 des.push(source.top());
+//                 source.pop();
+//             }
+//         }
+    
+//     };
+class MyCircularDeque {
+    public:
+        int capacity;
+        int size;
+        stack<int> stack_in;
+        stack<int> stack_out;
+
+    public:
+        /** Initialize your data structure here. Set the size of the deque to be k. */
+        MyCircularDeque(int k) {
+            capacity = k;
+            size = 0;
+        }
+        
+        /** Adds an item at the front of Deque. Return true if the operation is successful. */
+        bool insertFront(int value) {
+            if(isFull()) return false;
+            stack_out.push(value);
+            size ++;
+            return true;
+        }
+        
+        /** Adds an item at the rear of Deque. Return true if the operation is successful. */
+        bool insertLast(int value) {
+            if(isFull()) return false;
+            stack_in.push(value);
+            size ++;
+            return true;
+        }
+        
+        /** Deletes an item from the front of Deque. Return true if the operation is successful. */
+        bool deleteFront() {
+            if(isEmpty()) return false;
+            if(stack_out.empty())
+            {
+                source2Des(stack_in,stack_out);
+            }
+            stack_out.pop();
+            size --;
+            return true;
+        }
+        
+        /** Deletes an item from the rear of Deque. Return true if the operation is successful. */
+        bool deleteLast() {
+            if(isEmpty()) return false;
+            if(stack_in.empty())
+            {
+                source2Des(stack_out,stack_in);
+            }
+            stack_in.pop();
+            size --;
+            return true;
+        }
+        
+        /** Get the front item from the deque. */
+        int getFront() {
+            if(isEmpty()) return -1;
+            if(stack_out.empty())
+            {
+                source2Des(stack_in,stack_out);
+            }
+            return stack_out.top();
+        }
+        
+        /** Get the last item from the deque. */
+        int getRear() {
+            if(isEmpty()) return -1;
+            if(stack_in.empty())
+            {
+                source2Des(stack_out,stack_in);
+            }
+            return stack_in.top();
+        }
+        
+        /** Checks whether the circular deque is empty or not. */
+        bool isEmpty() {
+            return size ==0;
+        }
+        
+        /** Checks whether the circular deque is full or not. */
+        bool isFull() {
+            return size >= capacity;
+        }
+
+        void source2Des(stack<int>& source,stack<int>& des)
+        {
+            while(!source.empty())
+            {
+                des.push(source.top());
+                source.pop();
+            }
+        }
+    
+    };
+
+    /**
+     * Your MyCircularDeque object will be instantiated and called as such:
+     * MyCircularDeque* obj = new MyCircularDeque(k);
+     * bool param_1 = obj->insertFront(value);
+     * bool param_2 = obj->insertLast(value);
+     * bool param_3 = obj->deleteFront();
+     * bool param_4 = obj->deleteLast();
+     * int param_5 = obj->getFront();
+ * int param_6 = obj->getRear();
+ * bool param_7 = obj->isEmpty();
+ * bool param_8 = obj->isFull();
+ */
+// @lc code=end
+
